@@ -154,4 +154,100 @@ class CheckingAgent:
         if improvements_section:
             improvements_text = improvements_section.group(1).strip()
             # Extract bullet points
-            improvements
+            improvements = [line.strip().lstrip('-*•').strip() for line in improvements_text.split('\n') 
+                     if line.strip() and any(line.strip().startswith(bullet) for bullet in ['-', '*', '•'])]
+        
+        # Extract improved code if provided
+        improved_code_match = re.search(r'```(\w*)\n([\s\S]*?)\n```', content)
+        improved_code = improved_code_match.group(2) if improved_code_match else None
+        
+        return {
+            "success": success and not any(re.search(r'critical|severe|major', issue, re.IGNORECASE) for issue in issues),
+            "verdict": verdict,
+            "issues": issues,
+            "improvements": improvements,
+            "improved_code": improved_code,
+            "raw_analysis": content
+        }
+    
+    def _execute_code(self, code):
+        """
+        Execute code in the virtual executor to test functionality.
+        
+        Args:
+            code (str): Code to execute
+            
+        Returns:
+            dict: Execution results
+        """
+        self.logger.info("Executing code in virtual environment")
+        
+        # Use the virtual executor to run the code
+        execution_result = self.executor.sandbox_execution(code)
+        
+        if execution_result["success"]:
+            self.logger.info("Code executed successfully")
+        else:
+            self.logger.warning(f"Code execution failed: {execution_result.get('error', 'Unknown error')}")
+        
+        return execution_result
+    
+    def _find_main_file(self, code_files):
+        """
+        Find the main Python file in a collection of files.
+        
+        Args:
+            code_files (dict): Dictionary of filename -> code
+            
+        Returns:
+            str: Name of the main file, or None if not found
+        """
+        # Look for common main file patterns
+        for filename in code_files:
+            if filename == "main.py" or "main" in filename:
+                return filename
+                
+        # Look for files with if __name__ == "__main__":
+        for filename, content in code_files.items():
+            if filename.endswith('.py') and '__name__ == "__main__"' in content:
+                return filename
+        
+        # If no clear main file, return the first Python file
+        for filename in code_files:
+            if filename.endswith('.py'):
+                return filename
+                
+        return None
+    
+    def _get_language(self, filename):
+        """
+        Get the language type based on file extension.
+        
+        Args:
+            filename (str): Filename with extension
+            
+        Returns:
+            str: Language identifier for markdown code blocks
+        """
+        extension = filename.split('.')[-1].lower()
+        
+        language_map = {
+            'py': 'python',
+            'js': 'javascript',
+            'ts': 'typescript',
+            'html': 'html',
+            'css': 'css',
+            'json': 'json',
+            'md': 'markdown',
+            'sh': 'bash',
+            'rb': 'ruby',
+            'go': 'go',
+            'rs': 'rust',
+            'java': 'java',
+            'c': 'c',
+            'cpp': 'cpp',
+            'cs': 'csharp',
+            'php': 'php'
+        }
+        
+        return language_map.get(extension, '')
