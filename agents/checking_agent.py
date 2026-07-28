@@ -2,6 +2,8 @@
 Checking agent responsible for verifying code functionality and correctness.
 """
 
+from __future__ import annotations
+
 import logging
 
 from core.virtual_executor import VirtualExecutor
@@ -13,7 +15,7 @@ class CheckingAgent:
     Specialized agent that handles code verification and testing.
     """
 
-    def __init__(self, model_manager):
+    def __init__(self, model_manager) -> None:
         """
         Initialize the checking agent.
 
@@ -24,7 +26,7 @@ class CheckingAgent:
         self.model_manager = model_manager
         self.executor = VirtualExecutor()
 
-    def verify_code(self, code, requirements=None):
+    def verify_code(self, code: str | dict, requirements: list | None = None) -> dict:
         """
         Verify the generated code against requirements and test for functionality.
 
@@ -86,7 +88,9 @@ class CheckingAgent:
         )
         return verification_result
 
-    def _static_code_analysis(self, code, requirements=None):
+    def _static_code_analysis(
+        self, code: str | dict, requirements: list | None = None
+    ) -> dict:
         """
         Perform static analysis on the code using the checking model.
 
@@ -138,7 +142,7 @@ class CheckingAgent:
         # Parse the checking response
         return self._parse_checking_response(response["content"])
 
-    def _parse_checking_response(self, content):
+    def _parse_checking_response(self, content: str) -> dict:
         """
         Parse the checking model's response to extract verification results.
 
@@ -223,7 +227,7 @@ class CheckingAgent:
             "raw_analysis": content,
         }
 
-    def _execute_code(self, code):
+    def _execute_code(self, code: str) -> dict:
         """
         Execute code in the virtual executor to test functionality.
 
@@ -247,7 +251,7 @@ class CheckingAgent:
 
         return execution_result
 
-    def _find_main_file(self, code_files):
+    def _find_main_file(self, code_files: dict) -> str | None:
         """
         Find the main Python file in a collection of files.
 
@@ -274,7 +278,7 @@ class CheckingAgent:
 
         return None
 
-    def _get_language(self, filename):
+    def _get_language(self, filename: str) -> str:
         """
         Get the language type based on file extension.
 

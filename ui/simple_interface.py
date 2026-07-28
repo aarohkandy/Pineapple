@@ -12,7 +12,7 @@ class SimpleInterface:
     Implements a simple command-line interface for interacting with the AI agent.
     """
 
-    def __init__(self, engine):
+    def __init__(self, engine) -> None:
         """
         Initialize the interface.
 
@@ -22,7 +22,7 @@ class SimpleInterface:
         self.logger = logging.getLogger("interface")
         self.engine = engine
 
-    def run(self):
+    def run(self) -> None:
         """Run the interface in interactive mode."""
         self.logger.info("Starting interactive mode")
 
@@ -76,7 +76,7 @@ class SimpleInterface:
                 self.logger.error(f"Error processing request: {str(e)}")
                 print(f"\nAn error occurred: {str(e)}")
 
-    def _display_result(self, result):
+    def _display_result(self, result: dict) -> None:
         """
         Display the result of processing a request.
 
@@ -164,7 +164,7 @@ class SimpleInterface:
                     elif execution.get("stderr"):
                         print(f"Error: {execution['stderr'][:200]}")
 
-    def _save_files(self, result):
+    def _save_files(self, result: dict) -> None:
         """
         Save generated files to the current directory.
 

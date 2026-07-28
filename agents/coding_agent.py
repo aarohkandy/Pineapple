@@ -14,7 +14,7 @@ class CodingAgent:
     created by the planning agent.
     """
 
-    def __init__(self, model_manager):
+    def __init__(self, model_manager) -> None:
         """
         Initialize the coding agent.
 
@@ -24,7 +24,7 @@ class CodingAgent:
         self.logger = logging.getLogger("coding_agent")
         self.model_manager = model_manager
 
-    def generate_code(self, user_prompt, plan, research):
+    def generate_code(self, user_prompt: str, plan: str, research: str) -> dict:
         """
         Generate code based on the user's request and planning results.
 
@@ -89,7 +89,7 @@ class CodingAgent:
             "file_structure": file_structure,
         }
 
-    def _extract_code_blocks(self, content):
+    def _extract_code_blocks(self, content: str) -> list:
         """
         Extract code blocks from the model's response.
 
@@ -113,7 +113,7 @@ class CodingAgent:
 
         return code_blocks
 
-    def _process_code_blocks(self, code_blocks):
+    def _process_code_blocks(self, code_blocks: list) -> dict:
         """
         Process code blocks to extract file information.
 
@@ -145,7 +145,7 @@ class CodingAgent:
 
         return file_structure
 
-    def _get_extension_for_language(self, language):
+    def _get_extension_for_language(self, language: str) -> str:
         """
         Get the file extension for a programming language.
 
@@ -177,7 +177,7 @@ class CodingAgent:
 
         return extensions.get(language.lower(), ".txt")
 
-    def _extract_explanation(self, content):
+    def _extract_explanation(self, content: str) -> str:
         """
         Extract explanation text from the model's response.
 

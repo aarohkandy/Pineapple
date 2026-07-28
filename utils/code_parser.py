@@ -12,11 +12,11 @@ class CodeParser:
     Provides utilities for parsing and analyzing code structures.
     """
 
-    def __init__(self):
+    def __init__(self) -> None:
         """Initialize the code parser."""
         self.logger = logging.getLogger("code_parser")
 
-    def extract_code_blocks(self, text):
+    def extract_code_blocks(self, text: str) -> list:
         """
         Extract code blocks from markdown-formatted text.
 
@@ -37,7 +37,7 @@ class CodeParser:
 
         return code_blocks
 
-    def extract_imports(self, python_code):
+    def extract_imports(self, python_code: str) -> list:
         """
         Extract import statements from Python code.
 
@@ -65,7 +65,7 @@ class CodeParser:
             )
             return []
 
-    def extract_functions(self, python_code):
+    def extract_functions(self, python_code: str) -> list:
         """
         Extract function names and signatures from Python code.
 
@@ -99,7 +99,7 @@ class CodeParser:
             )
             return []
 
-    def extract_classes(self, python_code):
+    def extract_classes(self, python_code: str) -> list:
         """
         Extract class names, methods, and inheritance from Python code.
 
@@ -141,7 +141,7 @@ class CodeParser:
             )
             return []
 
-    def analyze_code_complexity(self, python_code):
+    def analyze_code_complexity(self, python_code: str) -> dict:
         """
         Simple analysis of code complexity.
 

@@ -2,6 +2,8 @@
 Virtual executor for testing code within a safe environment.
 """
 
+from __future__ import annotations
+
 import logging
 import os
 import subprocess
@@ -16,11 +18,13 @@ class VirtualExecutor:
     to verify functionality and catch errors.
     """
 
-    def __init__(self):
+    def __init__(self) -> None:
         """Initialize the virtual executor."""
         self.logger = logging.getLogger("virtual_executor")
 
-    def test_python_code(self, code, inputs=None, timeout=10):
+    def test_python_code(
+        self, code: str, inputs: list[str] | None = None, timeout: int = 10
+    ) -> dict:
         """
         Test Python code by executing it in a separate process.
 
@@ -98,7 +102,7 @@ class VirtualExecutor:
             if os.path.exists(temp_path):
                 os.unlink(temp_path)
 
-    def sandbox_execution(self, code, language="python"):
+    def sandbox_execution(self, code: str, language: str = "python") -> dict:
         """
         Execute code in a safe sandbox environment.
         Currently supports Python only.

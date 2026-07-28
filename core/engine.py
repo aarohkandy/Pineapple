@@ -13,7 +13,7 @@ from core.model_manager import ModelManager
 class AgentEngine:
     """Main orchestrator for the AI Agent application."""
 
-    def __init__(self):
+    def __init__(self) -> None:
         """Initialize the engine and its agent components."""
         self.logger = logging.getLogger("engine")
         self.model_manager = ModelManager()
@@ -25,7 +25,7 @@ class AgentEngine:
 
         self.logger.info("Agent engine initialized with all components")
 
-    def process_request(self, user_prompt):
+    def process_request(self, user_prompt: str) -> dict:
         """
         Process a user request through the complete pipeline:
         planning → coding → checking

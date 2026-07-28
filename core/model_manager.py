@@ -2,6 +2,8 @@
 Manages the connection to OpenRouter API and handles model selection and fallbacks.
 """
 
+from __future__ import annotations
+
 import logging
 import os
 import time
@@ -17,7 +19,7 @@ class ModelManager:
     a model is unavailable or reaches its rate limit.
     """
 
-    def __init__(self):
+    def __init__(self) -> None:
         """Initialize the model manager with API credentials and model configurations."""
         self.logger = logging.getLogger("model_manager")
 
@@ -31,7 +33,9 @@ class ModelManager:
 
         self.logger.info("Model manager initialized")
 
-    def select_model(self, model_type, previous_models=None):
+    def select_model(
+        self, model_type: str, previous_models: list[str] | None = None
+    ) -> str:
         """
         Select an appropriate model for the task type, avoiding recently used models.
 
@@ -74,7 +78,13 @@ class ModelManager:
         # Return the first available model
         return available_models[0]
 
-    def call_model(self, model_type, prompt, previous_models=None, system_prompt=None):
+    def call_model(
+        self,
+        model_type: str,
+        prompt: str,
+        previous_models: list[str] | None = None,
+        system_prompt: str | None = None,
+    ) -> dict:
         """
         Make an API call to a selected model with fallback logic.
 

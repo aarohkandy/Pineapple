@@ -2,6 +2,8 @@
 Planning agent responsible for breaking down tasks, researching, and creating a plan.
 """
 
+from __future__ import annotations
+
 import json
 import logging
 
@@ -14,7 +16,7 @@ class PlanningAgent:
     research, and creating a structured plan for the coding agent.
     """
 
-    def __init__(self, model_manager):
+    def __init__(self, model_manager) -> None:
         """
         Initialize the planning agent.
 
@@ -24,7 +26,7 @@ class PlanningAgent:
         self.logger = logging.getLogger("planning_agent")
         self.model_manager = model_manager
 
-    def create_plan(self, user_prompt):
+    def create_plan(self, user_prompt: str) -> dict:
         """
         Create a detailed plan based on the user's request.
 
@@ -88,7 +90,7 @@ class PlanningAgent:
                 "task_breakdown": [],
             }
 
-    def _extract_planning_data(self, content):
+    def _extract_planning_data(self, content: str) -> dict | None:
         """
         Extract structured planning data from the model's response.
 
@@ -141,7 +143,7 @@ class PlanningAgent:
             self.logger.warning(f"Error extracting planning data: {str(e)}")
             return None
 
-    def _extract_list(self, text):
+    def _extract_list(self, text: str) -> list:
         """
         Extract a list of items from text, typically from bullet points.
 

@@ -9,7 +9,7 @@ from core.engine import AgentEngine
 from ui.simple_interface import SimpleInterface
 
 
-def setup_logging():
+def setup_logging() -> None:
     """Configure application logging."""
     logging.basicConfig(
         level=logging.INFO,
@@ -18,7 +18,7 @@ def setup_logging():
     )
 
 
-def main():
+def main() -> None:
     """Main application entry point."""
     setup_logging()
     logger = logging.getLogger("main")
