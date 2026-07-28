@@ -6,6 +6,7 @@ from __future__ import annotations
 
 import json
 import logging
+import re
 
 from utils.prompt_templates import PLANNING_PROMPT_TEMPLATE, PLANNING_SYSTEM_PROMPT
 
@@ -103,8 +104,6 @@ class PlanningAgent:
         # Look for JSON blocks in the response
         try:
             # Find JSON blocks between markers like ```json and ```
-            import re
-
             json_matches = re.findall(r"```(?:json)?\s*([\s\S]*?)\s*```", content)
 
             if json_matches:
@@ -124,8 +123,13 @@ class PlanningAgent:
             )
             tasks_section = re.search(r"## Tasks([\s\S]*?)(?=##|$)", content)
 
+            # Fall back to the full content for the plan when there is no
+            # explicit "## Plan" section, so the coding agent always receives a
+            # usable plan rather than an empty string.
+            plan_text = plan_section.group(1).strip() if plan_section else ""
+
             result = {
-                "plan": plan_section.group(1).strip() if plan_section else "",
+                "plan": plan_text if plan_text else content,
                 "research": (
                     research_section.group(1).strip() if research_section else ""
                 ),
@@ -163,7 +167,7 @@ class PlanningAgent:
         items = []
         for line in lines:
             # Remove bullet points, numbers, etc.
-            clean_line = re.sub(r"^[\s-*•\d.]+\s*", "", line)
+            clean_line = re.sub(r"^[\s\-*•\d.]+\s*", "", line)
             if clean_line:
                 items.append(clean_line)
 
