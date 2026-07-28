@@ -1,6 +1,7 @@
 """
 Application settings for the AI agent.
 """
+
 import os
 
 # API configuration

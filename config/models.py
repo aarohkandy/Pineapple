@@ -9,7 +9,7 @@ PLANNING_MODELS = [
     "openai/gpt-3.5-turbo",
     "meta-llama/llama-2-13b-chat",
     "google/palm-2-chat-bison",
-    "anthropic/claude-instant-1"
+    "anthropic/claude-instant-1",
 ]
 
 # Coding agent models (free models from OpenRouter)
@@ -19,7 +19,7 @@ CODING_MODELS = [
     "meta-llama/llama-2-13b-chat",
     "mistralai/mistral-7b-instruct",
     "google/palm-2-chat-bison",
-    "anthropic/claude-instant-1"
+    "anthropic/claude-instant-1",
 ]
 
 # Checking agent models (free models from OpenRouter)
@@ -29,31 +29,15 @@ CHECKING_MODELS = [
     "anthropic/claude-instant-1",
     "meta-llama/llama-2-13b-chat",
     "mistralai/mistral-7b-instruct",
-    "google/palm-2-chat-bison"
+    "google/palm-2-chat-bison",
 ]
 
 # Model request parameters
-DEFAULT_MODEL_PARAMS = {
-    "temperature": 0.7,
-    "top_p": 0.9,
-    "max_tokens": 4000
-}
+DEFAULT_MODEL_PARAMS = {"temperature": 0.7, "top_p": 0.9, "max_tokens": 4000}
 
 # Model parameters by task type
 TASK_PARAMS = {
-    "planning": {
-        "temperature": 0.5,
-        "top_p": 0.9,
-        "max_tokens": 4000
-    },
-    "coding": {
-        "temperature": 0.3,
-        "top_p": 0.95,
-        "max_tokens": 8000
-    },
-    "checking": {
-        "temperature": 0.2,
-        "top_p": 0.9,
-        "max_tokens": 4000
-    }
+    "planning": {"temperature": 0.5, "top_p": 0.9, "max_tokens": 4000},
+    "coding": {"temperature": 0.3, "top_p": 0.95, "max_tokens": 8000},
+    "checking": {"temperature": 0.2, "top_p": 0.9, "max_tokens": 4000},
 }
