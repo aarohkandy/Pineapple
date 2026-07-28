@@ -2,13 +2,12 @@
 Virtual executor for testing code within a safe environment.
 """
 import logging
-import subprocess
-import tempfile
 import os
+import subprocess
 import sys
-import io
-import contextlib
+import tempfile
 from datetime import datetime
+
 
 class VirtualExecutor:
     """

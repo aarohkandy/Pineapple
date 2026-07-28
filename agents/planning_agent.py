@@ -1,9 +1,11 @@
 """
 Planning agent responsible for breaking down tasks, researching, and creating a plan.
 """
-import logging
 import json
-from utils.prompt_templates import PLANNING_SYSTEM_PROMPT, PLANNING_PROMPT_TEMPLATE
+import logging
+
+from utils.prompt_templates import PLANNING_PROMPT_TEMPLATE, PLANNING_SYSTEM_PROMPT
+
 
 class PlanningAgent:
     """
@@ -110,7 +112,7 @@ class PlanningAgent:
                     try:
                         data = json.loads(match)
                         return data
-                    except:
+                    except Exception:
                         continue
             
             # If we can't find JSON blocks, look for sections

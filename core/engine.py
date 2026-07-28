@@ -2,10 +2,12 @@
 Core engine that coordinates between the planning, coding, and checking agents.
 """
 import logging
-from agents.planning_agent import PlanningAgent
-from agents.coding_agent import CodingAgent
+
 from agents.checking_agent import CheckingAgent
+from agents.coding_agent import CodingAgent
+from agents.planning_agent import PlanningAgent
 from core.model_manager import ModelManager
+
 
 class AgentEngine:
     """Main orchestrator for the AI Agent application."""

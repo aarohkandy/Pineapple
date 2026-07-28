@@ -4,9 +4,11 @@ Manages the connection to OpenRouter API and handles model selection and fallbac
 import logging
 import os
 import time
-import json
+
 import requests
-from config.models import PLANNING_MODELS, CODING_MODELS, CHECKING_MODELS
+
+from config.models import CHECKING_MODELS, CODING_MODELS, PLANNING_MODELS
+
 
 class ModelManager:
     """

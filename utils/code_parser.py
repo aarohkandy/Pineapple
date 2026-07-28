@@ -1,10 +1,10 @@
 """
 Utilities for parsing and analyzing code.
 """
+import ast
 import logging
 import re
-import ast
-import json
+
 
 class CodeParser:
     """

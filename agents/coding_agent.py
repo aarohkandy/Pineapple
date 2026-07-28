@@ -3,7 +3,9 @@ Coding agent responsible for generating code based on planning inputs.
 """
 import logging
 import re
-from utils.prompt_templates import CODING_SYSTEM_PROMPT, CODING_PROMPT_TEMPLATE
+
+from utils.prompt_templates import CODING_PROMPT_TEMPLATE, CODING_SYSTEM_PROMPT
+
 
 class CodingAgent:
     """
@@ -93,7 +95,6 @@ class CodingAgent:
             list: Extracted code blocks with language and content
         """
         # Look for code blocks in markdown format: ```language\ncode\n```
-        import re
         code_block_pattern = r'```(\w*)\n([\s\S]*?)\n```'
         matches = re.findall(code_block_pattern, content)
         
@@ -185,7 +186,6 @@ class CodingAgent:
             str: Extracted explanation
         """
         # Remove code blocks to get the explanation
-        import re
         explanation = re.sub(r'```(\w*)\n[\s\S]*?\n```', '', content)
         
         # Clean up the explanation

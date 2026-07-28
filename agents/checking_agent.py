@@ -2,8 +2,10 @@
 Checking agent responsible for verifying code functionality and correctness.
 """
 import logging
-from utils.prompt_templates import CHECKING_SYSTEM_PROMPT, CHECKING_PROMPT_TEMPLATE
+
 from core.virtual_executor import VirtualExecutor
+from utils.prompt_templates import CHECKING_PROMPT_TEMPLATE, CHECKING_SYSTEM_PROMPT
+
 
 class CheckingAgent:
     """

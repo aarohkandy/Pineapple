@@ -2,11 +2,12 @@
 """
 Main entry point for the AI Agent application.
 """
-import sys
-import os
 import logging
-from ui.simple_interface import SimpleInterface
+import sys
+
 from core.engine import AgentEngine
+from ui.simple_interface import SimpleInterface
+
 
 def setup_logging():
     """Configure application logging."""

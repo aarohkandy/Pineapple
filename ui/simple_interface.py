@@ -2,11 +2,9 @@
 Simple command-line interface for the AI Agent application.
 """
 import logging
-import time
 import os
-import json
-import sys
-from pathlib import Path
+import time
+
 
 class SimpleInterface:
     """
@@ -28,7 +26,7 @@ class SimpleInterface:
         self.logger.info("Starting interactive mode")
         
         print("\n" + "="*60)
-        print(f"  AI Agent - Powered by OpenRouter")
+        print("  AI Agent - Powered by OpenRouter")
         print("="*60)
         print("\nThis agent uses specialized models for planning, coding, and checking.")
         print("Enter your coding or development request, and the agent will create a solution.")
