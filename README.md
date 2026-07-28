@@ -83,4 +83,4 @@ MIT License
 
 ## Acknowledgements
 
-This project uses models from OpenRouter (https://openrouter.ai/).fi
+This project uses models from OpenRouter (https://openrouter.ai/).
